@@ -23,7 +23,7 @@ const store = new mongodbsession({
     uri: process.env.MongoDb,
     collection: 'homedemo'
 })
-
+app.set('trust proxy',1)
 app.use(session({
     secret: process.env.SecretKey,
     resave: false,
