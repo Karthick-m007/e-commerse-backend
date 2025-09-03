@@ -38,14 +38,16 @@ app.use(session({
 
 app.use(cors({
     origin: ["http://localhost:3000", "e-commerse-frontend-app-git-main-karthick-web.vercel.app","e-commerse-frontend-app-git-main-karthick-web.vercel.app"],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }))
 
 app.use(productRoute)
 app.use(userRoute)
 // app.use(cartRoute)
-const PORT = process.env.PORT
-app.listen(PORT, () => {
-    console.log(`server is runing in ${PORT}`)
-})
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
 
