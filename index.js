@@ -35,12 +35,16 @@ app.use(session({
         sameSite:'none'
     }
 }))
-
 app.use(cors({
-    origin: ["http://localhost:3000","e-commerse-frontend-f7sr931hx-karthick-web.vercel.app"],
+    origin: [
+        "http://localhost:3000",
+        "https://e-commerse-frontend-app.vercel.app", // your main prod domain
+        "https://e-commerse-frontend-f7sr931hx-karthick-web.vercel.app" // preview or other branches
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
-}))
+}));
+
 
 app.use(productRoute)
 app.use(userRoute)
