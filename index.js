@@ -31,33 +31,22 @@ app.use(session({
     store: store,
     cookie:{
         httpOnly:true,
-        secure: process.env.NODE_ENV === 'production',
+        secure:true,
         sameSite:'none'
     }
 }))
 
 app.use(cors({
-    origin: [
-        "http://localhost:3000",
-        "https://e-commerse-frontend-app-git-main-karthick-web.vercel.app",
-        "https://e-commerse-frontend-app.vercel.app"
-    ],
-
+    origin: ["http://localhost:3000","e-commerse-frontend-f7sr931hx-karthick-web.vercel.app"],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }))
-app.get('/', (req, res) => {
-    res.send('Backend is running!');
-});
-
 
 app.use(productRoute)
 app.use(userRoute)
 // app.use(cartRoute)
-const PORT = process.env.PORT || 5002;
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server is running on port ${PORT}`);
-});
-
-
+const PORT = process.env.PORT
+app.listen(PORT, () => {
+    console.log(`server is runing in ${PORT}`)
+})
 
