@@ -29,15 +29,15 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: store,
-    // cookie:{
-    //     httpOnly:true,
-    //     secure:true,
-    //     sameSite:'none'
-    // }
+    cookie:{
+        httpOnly:true,
+        secure:true,
+        sameSite:'none'
+    }
 }))
 
 app.use(cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000", "e-commerse-frontend-app-git-main-karthick-web.vercel.app","e-commerse-frontend-app-git-main-karthick-web.vercel.app"],
     credentials: true
 }))
 
