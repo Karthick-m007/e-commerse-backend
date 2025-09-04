@@ -60,17 +60,18 @@ userRoute.post('/login', async (req, res) => {
 
         const exist = await usermodel.findOne({ email })
         if (!exist) {
-            return res.json({ success: false, message: "user already exist" })
+            return res.json({ success: false, message: "user not found" })
         }
 
         if (exist.password !== password) {
             return res.json({ success: false, message: "password mismatch" })
         }
         req.session.user = {
-            id: exist.user_id,
+            user_id: exist._id,
             email: exist.email,
-            role:exist.role
+            role:exist.role,
         }
+        console.log(req.session.user.user_id)
 
         return res.json({ success: true, message: "login successfull", users: req.session.user })
 

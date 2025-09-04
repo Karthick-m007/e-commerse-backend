@@ -18,7 +18,6 @@ const cartschema= mongoose.Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref: 'home-ecommerse-product',
             required:true,
-            unique:true
         },
         quantity:{
             type:Number,

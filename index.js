@@ -5,6 +5,7 @@ const session = require("express-session")
 const productRoute = require('./route/productRoute')
 const userRoute = require('./route/userroute')
 const mongodbsession = require('connect-mongodb-session')(session)
+const path = require('path')
 
 const cors = require('cors')
 const cartRoute = require('./route/CartRoute')
@@ -13,7 +14,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use('/uploads', express.static('uploads'))
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 mongoose.connect(process.env.MongoDb)
     .then(() => console.log("mongodb connected"))
@@ -23,17 +24,17 @@ const store = new mongodbsession({
     uri: process.env.MongoDb,
     collection: 'homedemo'
 })
-app.set('trust proxy',1)
+// app.set('trust proxy',1)
 app.use(session({
     secret: process.env.SecretKey,
     resave: false,
     saveUninitialized: false,
     store: store,
-    cookie:{
-        httpOnly:true,
-        secure:true,
-        sameSite:'none'
-    }
+    // cookie:{
+    //     httpOnly:true,
+    //     secure:true,
+    //     sameSite:'none'
+    // }
 }))
 app.use(cors({
     origin: [
@@ -48,7 +49,7 @@ app.use(cors({
 
 app.use(productRoute)
 app.use(userRoute)
-// app.use(cartRoute)
+app.use(cartRoute)
 const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`server is runing in ${PORT}`)
