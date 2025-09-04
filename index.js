@@ -24,17 +24,17 @@ const store = new mongodbsession({
     uri: process.env.MongoDb,
     collection: 'homedemo'
 })
-// app.set('trust proxy',1)
+app.set('trust proxy',1)
 app.use(session({
     secret: process.env.SecretKey,
     resave: false,
     saveUninitialized: false,
     store: store,
-    // cookie:{
-    //     httpOnly:true,
-    //     secure:true,
-    //     sameSite:'none'
-    // }
+    cookie:{
+        httpOnly:true,
+        secure:true,
+        sameSite:'none'
+    }
 }))
 app.use(cors({
     origin: [
